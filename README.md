@@ -1,2 +1,2 @@
 # planet-orbit
-planets orbiting
+planets orbiting using HTML, CSS, and JavaScript
