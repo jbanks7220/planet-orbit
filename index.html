@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimal Planet Orbit</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    canvas {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="orbitCanvas"></canvas>
+  <script>
+    const canvas = document.getElementById('orbitCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    let angle = 0;
+    const radius = 150; // orbit radius
+    const planetRadius = 10;
+    const sunRadius = 20;
+    const speed = 0.01; // orbit speed
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw sun
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, sunRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#FFD700';
+      ctx.fill();
+
+      // Calculate planet position
+      const planetX = centerX + radius * Math.cos(angle);
+      const planetY = centerY + radius * Math.sin(angle);
+
+      // Draw planet
+      ctx.beginPath();
+      ctx.arc(planetX, planetY, planetRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#1E90FF';
+      ctx.fill();
+
+      angle += speed;
+
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+
+    // Make canvas responsive
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
